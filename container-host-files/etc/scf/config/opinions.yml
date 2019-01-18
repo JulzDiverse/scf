@@ -225,6 +225,8 @@ properties:
       transaction_tracer:
         enabled: true
         record_sql: obfuscated
+    opi:
+      enabled: true
     packages:
       blobstore_type: webdav
       webdav_config:
