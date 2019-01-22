@@ -307,6 +307,11 @@ helm: uaa-helm
 	make/kube helm
 .PHONY: helm
 
+eirini:
+	make/eirini
+.PHONY: eirini
+
+
 ########## CONFIGURATION TARGETS ##########
 
 generate: \

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -o errexit -o nounset
+
+GIT_ROOT=${GIT_ROOT:-$(git rev-parse --show-toplevel)}
+cd "${GIT_ROOT}"
+source .envrc
+
+FISSILE_OUTPUT_DIR="${GIT_ROOT}/output"
+rm -rf "${FISSILE_OUTPUT_DIR}/eirini-release"
+
+git clone --single-branch --branch spike-163184825 https://github.com/cloudfoundry-incubator/eirini-release ${GIT_ROOT}/output/eirini-release
+
+cat > "${FISSILE_OUTPUT_DIR}/helm/requirements.yaml" << EOF
+dependencies:
+  - name: eirini
+    version: 0.1.0
+    repository: file://${FISSILE_OUTPUT_DIR}/eirini-release/helm/eirini
+EOF
+
+pushd ${FISSILE_OUTPUT_DIR}/helm/
+  helm dependency build
+popd
