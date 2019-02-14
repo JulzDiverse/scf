@@ -3,21 +3,23 @@
 set -o errexit -o nounset
 
 GIT_ROOT=${GIT_ROOT:-$(git rev-parse --show-toplevel)}
+GIT_DESCRIBE=${GIT_DESCRIBE:-$(git describe --tags --long)}
+GIT_TAG=${GIT_TAG:-${GIT_DESCRIBE%-*-*}} # Remove the last two hyphen-separated sections
 cd "${GIT_ROOT}"
 source .envrc
 
 FISSILE_OUTPUT_DIR="${GIT_ROOT}/output"
-rm -rf "${FISSILE_OUTPUT_DIR}/eirini-release"
 
-git clone --single-branch --branch spike-163184825 https://github.com/cloudfoundry-incubator/eirini-release ${GIT_ROOT}/output/eirini-release
+version=$(curl https://api.github.com/repos/cloudfoundry-incubator/eirini-release/releases/latest | jq .name -r)
 
 cat > "${FISSILE_OUTPUT_DIR}/helm/requirements.yaml" << EOF
 dependencies:
   - name: eirini
-    version: 0.1.0
-    repository: file://${FISSILE_OUTPUT_DIR}/eirini-release/helm/eirini
+    version: $version 
+    repository: https://cloudfoundry-incubator.github.io/eirini-release
 EOF
 
 pushd ${FISSILE_OUTPUT_DIR}/helm/
+  helm repo add eirini https://cloudfoundry-incubator.github.io/eirini-release
   helm dependency build
 popd
