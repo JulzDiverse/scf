@@ -1792,6 +1792,43 @@ instance_groups:
   jobs:
   - name: global-properties # needs to be first so images use it for processing monit templates
     release: scf-helper
+  - name: adapter
+    release: cf-syslog-drain
+    properties:
+      bosh_containerization:
+        colocated_containers:
+        - loggregator-agent
+        run:
+          scaling: # one per 500 drains
+            min: 1
+            max: 65535
+            ha: 2
+          capabilities: []
+          memory: 128
+          virtual-cpus: 2
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                    - key: "app.kubernetes.io/component"
+                      operator: In
+                      values:
+                      - adapter
+                  topologyKey: "beta.kubernetes.io/os"
+          healthcheck:
+            readiness:
+              command:
+              - curl --silent --fail --head http://${HOSTNAME}:8080/health
+        ports:
+        - name: adapter
+          protocol: TCP
+          internal: 4443
+        - name: adapter-health
+          protocol: TCP
+          internal: 8080
   - name: authorize-internal-ca
     release: scf
   - name: patch-properties
