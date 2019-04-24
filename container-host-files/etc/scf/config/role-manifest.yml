@@ -776,6 +776,13 @@ instance_groups:
     release: scf-helper
   - name: authorize-internal-ca
     release: scf
+  - name: bpm
+    release: bpm
+    properties:
+      bosh_containerization:
+        run:
+          capabilities: [ALL]
+        pod-security-policy: privileged
   - name: cloud_controller_worker
     release: capi
     properties:
@@ -867,6 +874,13 @@ instance_groups:
     release: scf-helper
   - name: authorize-internal-ca
     release: scf
+  - name: bpm
+    release: bpm
+    properties:
+      bosh_containerization:
+        run:
+          capabilities: [ALL]
+        pod-security-policy: privileged
   - name: cloud_controller_clock
     release: capi
     properties:
@@ -1086,6 +1100,13 @@ instance_groups:
     release: scf
   - name: tps
     release: capi
+  - name: bpm
+    release: bpm
+    properties:
+      bosh_containerization:
+        run:
+          capabilities: [ALL]
+        pod-security-policy: privileged
   - name: cc_uploader
     release: capi
     properties:
