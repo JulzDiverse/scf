@@ -774,6 +774,7 @@ instance_groups:
   - scripts/patches/cc_pre_start_home.sh
   - scripts/patches/cc_ng_disable_credhub.sh
   post_config_scripts:
+  - scripts/create_nfs_data_dir.sh
   - scripts/bpm_kube_dns.rb
   jobs:
   - name: global-properties # needs to be first so images use it for processing monit templates.
@@ -869,6 +870,7 @@ instance_groups:
   - scripts/patches/cc_worker_disable_credhub.sh
   - scripts/patches/fix_monit_rsyslog.sh
   post_config_scripts:
+  - scripts/create_nfs_data_dir.sh
   - scripts/bpm_kube_dns.rb
   jobs:
   - name: global-properties # needs to be first so images use it for processing monit templates.
@@ -965,6 +967,7 @@ instance_groups:
   - scripts/patches/cc_clock_disable_credhub.sh
   - scripts/patches/fix_monit_rsyslog.sh
   post_config_scripts:
+  - scripts/create_nfs_data_dir.sh
   - scripts/bpm_kube_dns.rb
   jobs:
   - name: global-properties # needs to be first so images use it for processing monit templates.
@@ -1400,6 +1403,7 @@ instance_groups:
   - scripts/forward_logfiles.sh
   - scripts/patches/fix_monit_rsyslog.sh
   post_config_scripts:
+  - scripts/create_nfs_data_dir.sh
   - scripts/bpm_kube_dns.rb
   jobs:
   - name: global-properties # needs to be first so images use it for processing monit templates.
