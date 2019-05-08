@@ -27,15 +27,11 @@ rm -rf "${FISSILE_OUTPUT_DIR}"
 fissile build "${BUILD_TARGET}"
 
 if [ "${BUILD_TARGET}" = "helm" ]; then
-    if [[ $FISSILE_STEMCELL =~ ^.*fissile-stemcell-opensuse.*$ ]] ; then
-      chart_name_suffix="-opensuse"
-    fi
-
     cat > "${FISSILE_OUTPUT_DIR}/Chart.yaml" << EOF
 apiVersion: ${APP_VERSION}
 appVersion: ${PRODUCT_VERSION}
 description: A Helm chart for SUSE Cloud Foundry
-name: cf${chart_name_suffix:-}
+name: cf
 version: ${GIT_TAG}
 EOF
     cp chart-parts/* "${FISSILE_OUTPUT_DIR}/templates/"
