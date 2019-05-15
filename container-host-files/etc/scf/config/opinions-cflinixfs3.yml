@@ -1,0 +1,18 @@
+---
+the-stack-name: &the-stack-name cflinuxfs3
+
+the-bundles: &the-bundles
+  'buildpack/cflinuxfs3': "buildpack_app_lifecycle/buildpack_app_lifecycle.tgz"
+  docker:                 "docker_app_lifecycle/docker_app_lifecycle.tgz"
+
+the-stacks: &the-stacks
+  - name: cflinuxfs3
+    description: "Cloud Foundry Linux-based filesystem"
+
+the-rootfses: &the-rootfses
+  - "cflinuxfs3:/var/vcap/packages/cflinuxfs3/rootfs.tar"
+
+the-images: &the-images
+  - "/var/vcap/packages/cflinuxfs3/rootfs.tar"
+
+# Append common parts here

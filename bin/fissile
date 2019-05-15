@@ -12,10 +12,10 @@ if [ -f ${FISSILE_GIT_ROOT}/Jenkinsfile ] ; then
     # parts. Choose the variant first, which defines lots of anchors, then
     # add the common part, which references them.
 
-    if [ "${USE_SLE_BASE}" = "false" ] && [ "${USE_CFLINUXFS2_STACK}" != "true" ]; then
+    if [ "${USE_CFLINUXFS3_STACK}" = "true" ]; then
+        STACK_BASE="${FISSILE_LIGHT_CFLINUXFS3}"
+    elif [ "${USE_SLE_BASE}" = "false" ]; then
         STACK_BASE="${FISSILE_LIGHT_OPEN42}"
-    elif [ "${USE_CFLINUXFS2_STACK}" = "true" ]; then
-        STACK_BASE="${FISSILE_LIGHT_CFLINUXFS2}"
     else
         STACK_BASE="${FISSILE_LIGHT_SLE12}"
     fi
