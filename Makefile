@@ -138,11 +138,7 @@ uaa-helm: ${FISSILE_BINARY}
 scf-release:
 	make/bosh-release src/scf-release
 
-capi-release:	
-	make/bosh-release src/capi-release
-
 releases: \
-	capi-release \
 	scf-release \
 	uaa-releases \
 	${NULL}
