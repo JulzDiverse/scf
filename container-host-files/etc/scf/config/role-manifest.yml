@@ -161,7 +161,6 @@ instance_groups:
             min: 1
             max: 3
             ha: 2
-          capabilities: []
           memory: 128
           virtual-cpus: 2
           affinity:
@@ -189,8 +188,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
 - name: adapter
   scripts:
   - scripts/forward_logfiles.sh
@@ -211,7 +209,6 @@ instance_groups:
             min: 1
             max: 65535
             ha: 2
-          capabilities: []
           memory: 128
           virtual-cpus: 2
           affinity:
@@ -242,8 +239,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
 - name: nats
   environment_scripts:
   - scripts/configure-HA-hosts.sh
@@ -296,8 +292,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
 - name: mysql
   scripts:
   - scripts/create_mysql_data_tmp.sh
@@ -417,7 +412,6 @@ instance_groups:
             min: 1
             max: 3
             ha: 2
-          capabilities: []
           memory: 128
           virtual-cpus: 2
           affinity:
@@ -446,8 +440,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
   tags:
   - sequential-startup
   configuration:
@@ -586,8 +579,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
   - name: gorouter
     release: routing
     properties:
@@ -667,7 +659,6 @@ instance_groups:
             min: 1
             max: 3
             ha: 2
-          capabilities: []
           memory: 128
           virtual-cpus: 2
           healthcheck:
@@ -702,8 +693,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
   configuration:
     templates:
       properties.dns_health_check_host: 'mysql-set.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)).'
@@ -725,8 +715,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
   - name: routing-api
     release: routing
     properties:
@@ -800,7 +789,6 @@ instance_groups:
             min: 1
             max: 65535
             ha: 2
-          capabilities: []
           memory: 3800
           virtual-cpus: 4
           healthcheck:
@@ -839,8 +827,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
   - name: statsd_injector
     release: statsd-injector
   - name: go-buildpack
@@ -891,7 +878,6 @@ instance_groups:
             min: 1
             max: 65535
             ha: 2
-          capabilities: []
           memory: 750
           virtual-cpus: 2
           affinity:
@@ -911,8 +897,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
 - name: blobstore
   environment_scripts:
   - scripts/configure-HA-hosts.sh
@@ -937,7 +922,6 @@ instance_groups:
             min: 1
             max: 1
             # Not HA capable; use external HA storage instead
-          capabilities: []
           volumes:
           - path: /var/vcap/store
             type: persistent
@@ -959,8 +943,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
   configuration:
     templates:
       properties.route_registrar.routes: '[{"name":"blobstore", "port":8080, "tags":{"component":"blobstore"}, "uris":["blobstore.((DOMAIN))"], "registration_interval":"10s"}]'
@@ -996,7 +979,6 @@ instance_groups:
             min: 1
             max: 3
             ha: 2
-          capabilities: []
           memory: 750
           virtual-cpus: 2
           affinity:
@@ -1018,8 +1000,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
 - name: log-cache-scheduler
   scripts:
   - scripts/forward_logfiles.sh
@@ -1050,7 +1031,6 @@ instance_groups:
             min: 1
             max: 65535
             ha: 2
-          capabilities: []
           memory: 410
           virtual-cpus: 2
           affinity:
@@ -1070,8 +1050,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
   configuration:
     templates:
       properties.maps: >
@@ -1129,7 +1108,6 @@ instance_groups:
             min: 1
             max: 65535
             ha: 2
-          capabilities: []
           memory: 410
           virtual-cpus: 2
           healthcheck:
@@ -1172,8 +1150,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-          service-account: privileged
+          privileged: true
   - name: route_registrar
     release: routing
   configuration:
@@ -1298,7 +1275,6 @@ instance_groups:
             min: 1
             max: 65535
             ha: 2
-          capabilities: []
           memory: 128
           virtual-cpus: 2
           healthcheck:
@@ -1336,8 +1312,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
   configuration:
     templates:
       properties.route_registrar.routes: '[{"name":"log-api", "port":8081, "uris":["doppler.((DOMAIN))"], "registration_interval":"10s"}, {"name":"loggregator_trafficcontroller", "port":8080, "uris":["loggregator.((DOMAIN))"], "registration_interval":"10s"}]'
@@ -1452,8 +1427,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
 - name: diego-ssh
   environment_scripts:
   - scripts/go_log_level.sh
@@ -1533,7 +1507,7 @@ instance_groups:
             min: 1
             max: 3
             ha: 2
-          capabilities: [ALL]
+          privileged: true
           memory: 128
           virtual-cpus: 2
           affinity:
@@ -1613,7 +1587,7 @@ instance_groups:
             max: 254
             # Not sure why 2 isn't enough for HA, but https://docs.cloudfoundry.org/concepts/high-availability.html disagrees
             ha: 3
-          capabilities: [ALL]
+          privileged: true
           service-account: garden-runc
           volumes:
           - path: /var/vcap/data/grootfs
@@ -1699,8 +1673,7 @@ instance_groups:
             min: 1
             max: 1
           flight-stage: manual
-          capabilities: []
-          service-account: tests
+          service-account: tests-brain
 - name: acceptance-tests
   type: bosh-task
   tags:
@@ -1721,8 +1694,6 @@ instance_groups:
             min: 1
             max: 1
           flight-stage: manual
-          capabilities: []
-          #service-account: privileged # ???
   configuration:
     templates:
       properties.acceptance_tests.nodes: '"((ACCEPTANCE_TEST_NODES))"'
@@ -1745,8 +1716,7 @@ instance_groups:
             min: 0
             max: 1
           flight-stage: manual
-          capabilities: []
-          service-account: tests
+          service-account: tests-sits
   configuration:
     templates:
       properties.sync_integration_tests.bbs.svc.name: diego-api-bbs
@@ -1783,14 +1753,12 @@ instance_groups:
             min: 1
             max: 1
           flight-stage: manual
-          capabilities: []
   - name: bpm
     release: bpm
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
 - name: secret-generation
   type: bosh-task
   jobs:
@@ -1803,7 +1771,6 @@ instance_groups:
             min: 1
             max: 1
           flight-stage: pre-flight
-          capabilities: []
           memory: 256
           virtual-cpus: 1
           service-account: secret-generator
@@ -1834,7 +1801,6 @@ instance_groups:
             min: 1
             max: 1
           flight-stage: post-flight
-          capabilities: []
           memory: 256
           virtual-cpus: 1
           service-account: eirini
@@ -1860,7 +1826,6 @@ instance_groups:
             min: 1
             max: 1
             ha: 1
-          capabilities: []
           persistent-volumes: []
           shared-volumes: []
           memory: 2000
@@ -1879,8 +1844,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
   configuration:
     templates:
       properties.credhub.authentication.uaa.ca_certs: '["((UAA_CA_CERT))"]'
@@ -1978,8 +1942,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
   configuration:
     templates:
       properties.route_registrar.routes: '[{"name":"autoscalerapiserver", "port":7106, "tags":{"component":"autoscalerapiserver"}, "uris":["autoscaler.((DOMAIN))"], "registration_interval":"10s"}]'
@@ -2123,8 +2086,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-        pod-security-policy: privileged
+          privileged: true
   configuration:
     templates:
       properties.route_registrar.routes: '[{"name":"autoscalerservicebroker", "port":7101, "tags":{"component":"autoscalerservicebroker"}, "uris":["autoscalerservicebroker.((DOMAIN))"], "registration_interval":"10s"}]'
@@ -2177,8 +2139,7 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
-          service-account: privileged
+          privileged: true
   configuration:
     templates:
       properties.counters: >
