@@ -4,9 +4,9 @@ releases:
   url: "https://bosh.io/d/github.com/cloudfoundry-incubator/bpm-release?v=1.0.0"
   sha1: "42b95d4a0d6d15dd0b0ead62418ffb56208e2307"
 - name: "capi"
-  version: "1.81.0"
-  url: "https://bosh.io/d/github.com/cloudfoundry/capi-release?v=1.81.0"
-  sha1: "8116229c5789dc47cc6ff35d59c8a5c7e363c174"
+  version: "1.82.0"
+  url: "https://bosh.io/d/github.com/cloudfoundry/capi-release?v=1.82.0"
+  sha1: "6840b6a91f919ab4e5410f9d3f76dccdb9b0ad41"
 - name: cf-mysql
   url: https://bosh.io/d/github.com/cloudfoundry/cf-mysql-release?v=36.15.0
   version: 36.15.0
