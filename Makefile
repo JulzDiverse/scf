@@ -168,7 +168,6 @@ scf-release:
 
 releases: \
 	scf-release \
-	uaa-releases \
 	${NULL}
 
 diff-releases:
@@ -186,7 +185,6 @@ clean-compile-cache:
 compile: ${FISSILE_BINARY}
 	make/compile
 	make/compile restore
-	make/uaa/compile
 	make/compile cache
 
 compile-clean: clean ${FISSILE_BINARY} vagrant-prep
@@ -198,14 +196,14 @@ tar-sources:
 osc-commit-sources:
 	make/osc-commit-sources
 
-images: bosh-images uaa-images helm kube
+images: bosh-images helm kube
 
 bosh-images: validate ${FISSILE_BINARY}
 	make/bosh-images
 
 build: compile images
 
-publish: bosh-publish uaa-publish
+publish: bosh-publish 
 
 bosh-publish: ${FISSILE_BINARY}
 	make/bosh-publish
@@ -219,11 +217,11 @@ show-versions:
 
 ########## KUBERNETES TARGETS ##########
 
-kube: uaa-kube
+kube:
 	make/kube
 .PHONY: kube
 
-helm: uaa-helm
+helm:
 	make/kube helm
 .PHONY: helm
 
@@ -239,7 +237,7 @@ dist: \
 	kube-dist \
 	${NULL}
 
-kube-dist: kube uaa-kube-dist
+kube-dist: kube 
 	make/kube-dist
 	rm -rf kube
 
