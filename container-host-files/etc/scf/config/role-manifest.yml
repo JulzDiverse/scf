@@ -2570,11 +2570,6 @@ configuration:
     properties.cc.app_bits_max_body_size: ((NGINX_MAX_REQUEST_BODY_SIZE))M
     properties.cc.app_bits_upload_grace_period_in_seconds: ((APP_TOKEN_UPLOAD_GRACE_PERIOD))
 
-    properties.cc.bits_service.ca_cert: "((INTERNAL_CA_CERT))"
-    properties.cc.bits_service.password: "((BITS_ADMIN_USERS_PASSWORD))"
-    properties.cc.bits_service.private_endpoint: "https://bits-bits-service.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN))"
-    properties.cc.bits_service.public_endpoint: "https://bits.((DOMAIN))"
-
     properties.cc.broker_client_timeout_seconds: '"((BROKER_CLIENT_TIMEOUT_SECONDS))"'
     properties.cc.buildpacks.cdn.uri: '"((CDN_URI))"'
     properties.cc.buildpacks.webdav_config.password: '"((BLOBSTORE_PASSWORD))"'
@@ -3477,34 +3472,6 @@ variables:
     required: true
   type: certificate
 - name: BBS_SERVER_CRT_KEY
-  options:
-    secret: true
-    description: PEM-encoded client key.
-    required: true
-
-- name: BITS_ADMIN_USERS_PASSWORD
-  options:
-    secret: true
-    description: The basic auth password that the Cloud Controller uses to connect to the admin endpoint on webdav.
-    required: true
-  type: password
-- name: BITS_SERVICE_SECRET
-  options:
-    secret: true
-    description: This is the key secret Bits-Service uses and clients should use to generate signed URLs.
-    required: true
-  type: password
-- name: BITS_SERVICE_SSL_CERT
-  options:
-    secret: true
-    ca: INTERNAL_CA_CERT
-    role_name: bits
-    description: PEM-encoded client certificate.
-    required: true
-    alternative_names:
-    - bits-bits-service.{{.KUBERNETES_NAMESPACE}}.svc.{{.KUBERNETES_CLUSTER_DOMAIN}}
-  type: certificate
-- name: BITS_SERVICE_SSL_CERT_KEY
   options:
     secret: true
     description: PEM-encoded client key.
