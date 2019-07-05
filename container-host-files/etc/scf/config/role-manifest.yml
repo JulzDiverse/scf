@@ -2540,34 +2540,6 @@ configuration:
     properties.autoscaler.service_broker.server_cert: '"((AUTOSCALER_SERVICE_BROKER_SERVER_CERT))"'
     properties.autoscaler.service_broker.server_key: '"((AUTOSCALER_SERVICE_BROKER_SERVER_CERT_KEY))"'
 
-
-    properties.bits-service.active_signing_key.secret: "((BITS_SERVICE_SECRET))"
-    properties.bits-service.app_stash.webdav_config.ca_cert: "((INTERNAL_CA_CERT))"
-    properties.bits-service.app_stash.webdav_config.password: "((BLOBSTORE_PASSWORD))"
-    properties.bits-service.app_stash.webdav_config.private_endpoint: "https://blobstore-blobstore.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):4443"
-    properties.bits-service.app_stash.webdav_config.public_endpoint: "https://blobstore.((DOMAIN))"
-    properties.bits-service.buildpacks.webdav_config.ca_cert: ((INTERNAL_CA_CERT))
-    properties.bits-service.buildpacks.webdav_config.password: ((BLOBSTORE_PASSWORD))
-    properties.bits-service.buildpacks.webdav_config.private_endpoint: "https://blobstore-blobstore.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):4443"
-    properties.bits-service.buildpacks.webdav_config.public_endpoint: "https://blobstore.((DOMAIN))"
-    properties.bits-service.cc_updates.ca_cert: ((INTERNAL_CA_CERT))
-    properties.bits-service.cc_updates.cc_url: "https://api.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):9024/internal/v4/packages"
-    properties.bits-service.cc_updates.client_cert: ((CC_PUBLIC_TLS_CERT))
-    properties.bits-service.cc_updates.client_key: ((CC_PUBLIC_TLS_CERT_KEY))
-    properties.bits-service.droplets.webdav_config.ca_cert: ((INTERNAL_CA_CERT))
-    properties.bits-service.droplets.webdav_config.password: ((BLOBSTORE_PASSWORD))
-    properties.bits-service.droplets.webdav_config.private_endpoint: "https://blobstore-blobstore.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):4443"
-    properties.bits-service.droplets.webdav_config.public_endpoint: "https://blobstore.((DOMAIN))"
-    properties.bits-service.packages.webdav_config.ca_cert: ((INTERNAL_CA_CERT))
-    properties.bits-service.packages.webdav_config.password: ((BLOBSTORE_PASSWORD))
-    properties.bits-service.packages.webdav_config.private_endpoint: "https://blobstore-blobstore.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):4443"
-    properties.bits-service.packages.webdav_config.public_endpoint: https://blobstore.((DOMAIN))
-    properties.bits-service.private_endpoint: "https://bits-bits-service.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN))"
-    properties.bits-service.public_endpoint: "https://bits.((DOMAIN))"
-    properties.bits-service.signing_users: '[{"username": "admin", "password": "((BITS_ADMIN_USERS_PASSWORD))"}]'
-    properties.bits-service.tls.cert: ((BITS_SERVICE_SSL_CERT))
-    properties.bits-service.tls.key: ((BITS_SERVICE_SSL_CERT_KEY))
-
     properties.blobstore.admin_users: '[{"username": "blobstore_user", "password": "((BLOBSTORE_PASSWORD))"}]'
     properties.blobstore.internal_access_rules: '[((BLOBSTORE_ACCESS_RULES))]'
     properties.blobstore.max_upload_size: ((BLOBSTORE_MAX_UPLOAD_SIZE))m
@@ -3632,11 +3604,6 @@ variables:
     secret: true
     description: The PEM-encoded private key for internal cloud controller traffic.
     required: true
-- name: CC_UPLOADER_CC_UPLOADER_SERVICE_HOST
-  options:
-    type: environment
-    description: IP of the cc uploader service. This is automatically set by Kubernetes.
-      traffic.
 - name: CC_UPLOADER_CRT
   options:
     secret: true
@@ -3953,20 +3920,6 @@ variables:
     description: The name of the kubernetes namespace all components will run in.
       This parameter cannot be set by the user. Its value is supplied by the kubernetes
       runtime.
-
-- name: KUBERNETES_SERVICE_HOST
-  options:
-    type: environment
-    description: >
-      This is an environment variable set by Kubernetes.
-      We have to pass it through the templating mechanism, because monit doesn't keep the entrypoint's environment.
-- name: KUBERNETES_SERVICE_PORT
-  options:
-    type: environment
-    description: >
-      This is an environment variable set by Kubernetes.
-      We have to pass it through the templating mechanism, because monit doesn't keep the entrypoint's environment.
-
 
 - name: KUBERNETES_STORAGE_CLASS_PERSISTENT
   options:
