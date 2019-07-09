@@ -148,7 +148,7 @@ properties:
         skip_consul_lock: true
   cc:
     bits_service:
-      enabled: true
+      enabled: false
       username: admin
     buildpacks:
       blobstore_type: webdav
