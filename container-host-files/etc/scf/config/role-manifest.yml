@@ -616,6 +616,15 @@ instance_groups:
                     - key: "app.kubernetes.io/component"
                       operator: In
                       values:
+                      - diego-cell
+                  topologyKey: "beta.kubernetes.io/os"
+              - weight: 100
+                podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                    - key: "app.kubernetes.io/component"
+                      operator: In
+                      values:
                       - router
                   topologyKey: "beta.kubernetes.io/os"
           service-account: privileged # For port binding
@@ -3567,6 +3576,11 @@ variables:
     secret: true
     description: The PEM-encoded private key for internal cloud controller traffic.
     required: true
+- name: CC_UPLOADER_CC_UPLOADER_SERVICE_HOST
+  options:
+    type: environment
+    description: IP of the cc uploader service. This is automatically set by Kubernetes.
+      traffic.
 - name: CC_UPLOADER_CRT
   options:
     secret: true
@@ -3883,6 +3897,19 @@ variables:
     description: The name of the kubernetes namespace all components will run in.
       This parameter cannot be set by the user. Its value is supplied by the kubernetes
       runtime.
+
+- name: KUBERNETES_SERVICE_HOST
+  options:
+    type: environment
+    description: >
+      This is an environment variable set by Kubernetes.
+      We have to pass it through the templating mechanism, because monit doesn't keep the entrypoint's environment.
+- name: KUBERNETES_SERVICE_PORT
+  options:
+    type: environment
+    description: >
+      This is an environment variable set by Kubernetes.
+      We have to pass it through the templating mechanism, because monit doesn't keep the entrypoint's environment.
 
 - name: KUBERNETES_STORAGE_CLASS_PERSISTENT
   options:
