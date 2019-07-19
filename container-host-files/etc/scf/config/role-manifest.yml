@@ -2610,11 +2610,11 @@ configuration:
     properties.cc.mutual_tls.private_key: '"((CC_SERVER_CRT_KEY))"'
     properties.cc.mutual_tls.public_cert: '"((CC_SERVER_CRT))"'
     properties.cc.nginx_error_log_level: '"((NGINX_LOG_LEVEL))((#LOG_LEVEL))((/LOG_LEVEL))"'
-    properties.cc.opi.opi_staging: ((ENABLE_OPI_STAGING))
-    properties.cc.opi.url: https://eirini-opi.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):8085
+    properties.cc.opi.ca_cert: '"((INTERNAL_CA_CERT))"'
     properties.cc.opi.client_cert: '"((EIRINI_CLIENT_CRT))"'
     properties.cc.opi.client_key: '"((EIRINI_CLIENT_CRT_KEY))"'
-    properties.cc.opi.ca_cert: '"((INTERNAL_CA_CERT))"'
+    properties.cc.opi.opi_staging: ((ENABLE_OPI_STAGING))
+    properties.cc.opi.url: https://eirini-opi.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):8085
     properties.cc.packages.webdav_config.password: '"((BLOBSTORE_PASSWORD))"'
     properties.cc.packages.webdav_config.private_endpoint: https://blobstore-blobstore.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):4443
     properties.cc.packages.webdav_config.public_endpoint: '"https://blobstore.((DOMAIN))"'
