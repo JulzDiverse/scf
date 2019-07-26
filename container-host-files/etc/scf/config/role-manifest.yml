@@ -3796,7 +3796,7 @@ variables:
     required: true
 - name: ENABLE_OPI_STAGING
   options:
-    default: false
+    default: true
     description: Stage apps in Eirini <3
 
 - name: ENABLE_SECURITY_EVENT_LOGGING
