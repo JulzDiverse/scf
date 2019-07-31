@@ -162,8 +162,6 @@ instance_groups:
     release: routing
   - name: statsd_injector
     release: statsd-injector
-  - name: eirinifs
-    release: eirini
   - name: bpm
     release: bpm
     properties:
