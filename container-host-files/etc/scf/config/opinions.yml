@@ -142,6 +142,8 @@ properties:
       port: 7107
       publicPort: 7101
       require_consul: false
+  bits-service:
+    enable_registry: true
   capi:
     tps:
       watcher:
