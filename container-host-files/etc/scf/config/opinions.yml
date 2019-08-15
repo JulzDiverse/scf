@@ -385,6 +385,8 @@ properties:
     secure_cookies: null
     status:
       user: router_user
+    tracing:
+      enable_zipkin: true
   routing_api:
     enabled: true
     skip_consul_lock: true
