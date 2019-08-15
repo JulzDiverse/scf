@@ -147,9 +147,6 @@ properties:
       watcher:
         skip_consul_lock: true
   cc:
-    bits_service:
-      enabled: true
-      username: admin
     buildpacks:
       blobstore_type: webdav
       webdav_config:
