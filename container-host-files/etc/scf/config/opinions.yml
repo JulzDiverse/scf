@@ -142,10 +142,6 @@ properties:
       port: 7107
       publicPort: 7101
       require_consul: false
-  capi:
-    tps:
-      watcher:
-        skip_consul_lock: true
   cc:
     buildpacks:
       blobstore_type: webdav
