@@ -1609,7 +1609,6 @@ instance_groups:
           protocol: TCP
           internal: 8080
 - name: nfs-broker
-  unless_feature: eirini
   environment_scripts:
   - scripts/go_log_level.sh
   scripts:
@@ -1987,22 +1986,6 @@ instance_groups:
       properties.scf.secrets.is_install: ((HELM_IS_INSTALL))
       properties.scf.secrets.name: ((KUBE_SECRETS_GENERATION_NAME))
       properties.scf.secrets.namespace: ((KUBERNETES_NAMESPACE))
-- name: configure-eirini
-  if_feature: eirini
-  type: bosh-task
-  jobs:
-  - name: configure-eirini-scf
-    release: eirini
-    properties:
-      bosh_containerization:
-        run:
-          scaling:
-            min: 1
-            max: 1
-          flight-stage: post-flight
-          memory: 256
-          virtual-cpus: 1
-          service-account: eirini
 - name: post-deployment-setup
   type: bosh-task
   jobs:
@@ -2528,9 +2511,6 @@ configuration:
       garden-runc:
         roles: [configgin-role, psp-role]
         cluster-roles: [node-reader-role]
-      eirini:
-        roles: [configgin-role, secrets-role, psp-role]
-        cluster-roles: [mutating-webhook-role, daemonset-role]
   templates:
     az: '"((KUBE_AZ))"'
     id: ((HOSTNAME))
@@ -2778,24 +2758,6 @@ configuration:
     properties.diego.ssh_proxy.uaa.url: https://((KUBERNETES_NAMESPACE)).((UAA_HOST))
     properties.diego.ssh_proxy.uaa_secret: '"((UAA_CLIENTS_DIEGO_SSH_PROXY_SECRET))"'
     properties.domain: '"((DOMAIN))"'
-    properties.eirini-loggregator-bridge.kube_service_host: "((KUBERNETES_SERVICE_HOST))"
-    properties.eirini-loggregator-bridge.kube_service_port: "((KUBERNETES_SERVICE_PORT))"
-    properties.eirini-loggregator-bridge.loggregator_ca: '((INTERNAL_CA_CERT))'
-    properties.eirini-loggregator-bridge.loggregator_cert: '((LOGGREGATOR_FORWARD_CERT))'
-    properties.eirini-loggregator-bridge.loggregator_endpoint: "doppler-doppler.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):8082"
-    properties.eirini-loggregator-bridge.loggregator_key: '((LOGGREGATOR_FORWARD_CERT_KEY))'
-    properties.eirini-loggregator-bridge.namespace: '((EIRINI_KUBE_NAMESPACE))'
-    properties.eirini-persi-broker.auth_password: '"((EIRINI_PERSI_NFS_BROKER_PASSWORD))"'
-    properties.eirini-persi-broker.kube_service_host: "((KUBERNETES_SERVICE_HOST))"
-    properties.eirini-persi-broker.kube_service_port: "((KUBERNETES_SERVICE_PORT))"
-    properties.eirini-persi-broker.namespace: "((EIRINI_KUBE_NAMESPACE))"
-    properties.eirini-persi-broker.service_plans: '((EIRINI_PERSI_PLANS))'
-    properties.eirini-persi-broker.url: 'http://eirini-eirini-persi-broker.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):8999'
-    properties.eirini-persi.kube_service_host: "((KUBERNETES_SERVICE_HOST))"
-    properties.eirini-persi.kube_service_port: "((KUBERNETES_SERVICE_PORT))"
-    properties.eirini-persi.namespace: "((EIRINI_KUBE_NAMESPACE))"
-    properties.eirini-persi.operator_webhook_host: "((EIRINI_EIRINI_PERSI_SERVICE_HOST))"
-    properties.eirini.cert_copier_image: "((EIRINI_CERT_COPIER_IMAGE))"
     properties.external_cert: '"((LOG_CACHE_CF_AUTH_PROXY_EXTERNAL_CERT))"'
     properties.external_key: '"((LOG_CACHE_CF_AUTH_PROXY_EXTERNAL_CERT_KEY))"'
     properties.fissile.monit.password: '"((MONIT_PASSWORD))"'
