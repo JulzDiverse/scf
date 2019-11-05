@@ -188,7 +188,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
 - name: adapter
   scripts:
@@ -240,7 +239,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
 - name: nats
   environment_scripts:
@@ -293,7 +291,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
 - name: mysql
   scripts:
@@ -442,7 +439,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   tags:
   - sequential-startup
@@ -580,7 +576,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   - name: gorouter
     release: routing
@@ -694,7 +689,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   configuration:
     templates:
@@ -717,7 +711,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   - name: routing-api
     release: routing
@@ -829,7 +822,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   - name: statsd_injector
     release: statsd-injector
@@ -900,7 +892,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
 - name: blobstore
   environment_scripts:
@@ -947,7 +938,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   configuration:
     templates:
@@ -1005,7 +995,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
 - name: log-cache-scheduler
   scripts:
@@ -1055,7 +1044,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   configuration:
     templates:
@@ -1156,7 +1144,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   - name: route_registrar
     release: routing
@@ -1319,7 +1306,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   configuration:
     templates:
@@ -1433,7 +1419,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
 - name: diego-ssh
   environment_scripts:
@@ -1513,7 +1498,6 @@ instance_groups:
             min: 1
             max: 3
             ha: 2
-          capabilities: [ALL]
           privileged: true
           memory: 128
           virtual-cpus: 2
@@ -1593,7 +1577,6 @@ instance_groups:
             max: 254
             # Not sure why 2 isn't enough for HA, but https://docs.cloudfoundry.org/concepts/high-availability.html disagrees
             ha: 3
-          capabilities: [ALL]
           privileged: true
           service-account: garden-runc
           volumes:
@@ -1701,7 +1684,6 @@ instance_groups:
             min: 1
             max: 1
           flight-stage: manual
-          capabilities: []
   configuration:
     templates:
       properties.acceptance_tests.nodes: '"((ACCEPTANCE_TEST_NODES))"'
@@ -1766,7 +1748,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
 - name: secret-generation
   type: bosh-task
@@ -1853,7 +1834,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   configuration:
     templates:
@@ -1952,7 +1932,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   configuration:
     templates:
@@ -2097,7 +2076,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   configuration:
     templates:
@@ -2151,7 +2129,6 @@ instance_groups:
     properties:
       bosh_containerization:
         run:
-          capabilities: [ALL]
           privileged: true
   configuration:
     templates:
