@@ -2213,7 +2213,7 @@ configuration:
       - apiGroups: [""]
         resources: [configmaps, secrets]
         verbs: [create, get, list, patch, update, delete]
-      test-role:
+      test-role-brain:
       - apiGroups: [""]
         resources: [services]
         verbs: [create, get, delete]
@@ -2235,6 +2235,10 @@ configuration:
       - apiGroups: [""]
         resources: ["secrets"]
         verbs: [get, list]
+      test-role-sits:
+      - apiGroups: [""]
+        resources: [pods/portforward]
+        verbs: [create]
     cluster-roles:
       node-reader-role:
       - apiGroups: [""]
