@@ -154,12 +154,6 @@ properties:
     default_staging_security_groups:
     - public_networks
     - dns
-    diego:
-      lifecycle_bundles:
-        'buildpack/sle15':      "buildpack_app_lifecycle/buildpack_app_lifecycle.tgz"
-        'buildpack/sle12':      "buildpack_app_lifecycle/buildpack_app_lifecycle.tgz"
-        'buildpack/cflinuxfs3': "buildpack_app_lifecycle/buildpack_app_lifecycle.tgz"
-        docker:                 "docker_app_lifecycle/docker_app_lifecycle.tgz"
     droplets:
       blobstore_type: webdav
       webdav_config:
@@ -286,46 +280,6 @@ properties:
       api_force_https: false
       api_username: 'mysql_proxy'
   deployment: scf-deployment
-  diego:
-    auctioneer:
-      rep:
-        require_tls: true
-      skip_consul_lock: true
-    bbs:
-      active_key_label: active
-      auctioneer:
-        require_tls: true
-      detect_consul_cell_registrations: false
-      rep:
-        require_tls: true
-      skip_consul_lock: true
-      sql:
-        db_port: 3306
-        db_schema: diego
-        db_username: diego
-    executor:
-      garden:
-        address: 127.0.0.1:7777
-        network: tcp
-    file_server:
-      static_directory: /var/vcap/packages/
-    locket:
-      sql:
-        db_port: 3306
-        db_schema: diego_locket
-        db_username: diego_locket
-    rep:
-      evacuation_timeout_in_seconds: 60
-      preloaded_rootfses:
-      - "sle15:/var/vcap/packages/sle15/rootfs.tar"
-      - "sle12:/var/vcap/packages/cf-sle12/rootfs.tar"
-      - "cflinuxfs3:/var/vcap/packages/cflinuxfs3/rootfs.tar"
-    route_emitter:
-      local_mode: true
-      nats:
-        user: nats
-    ssh_proxy:
-      enable_cf_auth: true
   enable_consul_service_registration: false
   etcd:
     bootstrap_node: etcd-0
@@ -333,19 +287,6 @@ properties:
     monit:
       user: "admin"
       port: 2289
-  garden:
-    # By default we want to restrict all outbound access from containers
-    # so they can't access the CF network, or other apps. Traffic to the
-    # internet and services is configured using proper CF security group
-    # rules.
-    deny_networks: [0.0.0.0/0]
-    listen_address: 0.0.0.0:7777
-    listen_network: tcp
-  grootfs:
-    # Garden should at least be able to cache the cflinuxfs2 rootfs
-    # to avoid copy operations on every garden healthcheck from rep
-    # when there is no app running with the healthcheck rootfs.
-    reserved_space_for_other_jobs_in_mb: 3000
   loggregator:
     use_v2_api: true
   nats:
@@ -407,14 +348,10 @@ properties:
   set_kernel_parameters: false
   smoke_tests:
     user: 'admin'
-    org: smoke-test-org
-    space: smoke-test-space
     skip_ssl_validation: true
   system_domain_organization: null
   ssl:
     skip_cert_verify: false
-  tcp:
-    enabled: true
   tcp_router:
     health_check_port: 8080
   uaa:
