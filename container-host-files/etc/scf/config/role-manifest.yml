@@ -1862,10 +1862,6 @@ configuration:
       - apiGroups: [""]
         resources: ["secrets"]
         verbs: [get, list]
-      test-role-sits:
-      - apiGroups: [""]
-        resources: [pods/portforward]
-        verbs: [create]
     cluster-roles:
       node-reader-role:
       - apiGroups: [""]
@@ -1922,7 +1918,7 @@ configuration:
         roles: [configgin-role, test-role-brain, psp-role]
         cluster-roles: [test-cluster-role]
       tests-sits:
-        roles: [configgin-role, test-role-sits, psp-role]
+        roles: [configgin-role, psp-role]
       garden-runc:
         roles: [configgin-role, psp-role]
         cluster-roles: [node-reader-role]
