@@ -1863,10 +1863,6 @@ configuration:
         resources: ["secrets"]
         verbs: [get, list]
     cluster-roles:
-      node-reader-role:
-      - apiGroups: [""]
-        resources: [nodes]
-        verbs: [get, list, watch]
       eirini-role:
       - apiGroups: ["*"]
         resources: ["*"]
@@ -1921,7 +1917,7 @@ configuration:
         roles: [configgin-role, psp-role]
       garden-runc:
         roles: [configgin-role, psp-role]
-        cluster-roles: [node-reader-role]
+        cluster-roles: []
       eirini:
         roles: [configgin-role]
         cluster-roles: [eirini-role]
