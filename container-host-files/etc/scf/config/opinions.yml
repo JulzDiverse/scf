@@ -45,7 +45,7 @@ properties:
     org: test-brain-org
     space: test-brain-space
   app_ssh:
-    host_key_fingerprint: ""
+    host_key_fingerprint: "dummy"
   autoscaler:
     cf:
       client_id: app_autoscaler
