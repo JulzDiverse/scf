@@ -1939,7 +1939,7 @@ configuration:
     properties.acceptance_tests_brain.storage_class: '"((KUBERNETES_STORAGE_CLASS_PERSISTENT))"'
     properties.acceptance_tests_brain.tcp_domain: '"((TCP_DOMAIN))"'
     properties.app_domains: '["((DOMAIN))"]'
-    properties.app_ssh.host_key_fingerprint: '"((APP_SSH_KEY_FINGERPRINT))"'
+    properties.app_ssh.host_key_fingerprint: ''
     properties.autoscaler.api_server.ca_cert: '"((INTERNAL_CA_CERT))"'
     properties.autoscaler.api_server.cache_ttl: '((AUTOSCALER_API_SERVER_CACHE_TTL))'
     properties.autoscaler.api_server.db_config.idle_timeout: '((AUTOSCALER_API_SERVER_DB_CONFIG_IDLE_TIMEOUT))'
@@ -2336,12 +2336,6 @@ variables:
   options:
     default: true
     description: Allow users to change the value of the app-level allow_ssh attribute.
-    required: true
-- name: APP_SSH_KEY_FINGERPRINT
-  options:
-    secret: true
-    description: MD5 fingerprint of the host key of the SSH proxy that brokers connections
-      to application instances.
     required: true
 - name: APP_TOKEN_UPLOAD_GRACE_PERIOD
   options:
