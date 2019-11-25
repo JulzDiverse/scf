@@ -192,6 +192,7 @@ properties:
         record_sql: obfuscated
     opi:
       enabled: true
+      opi_staging: true
     packages:
       blobstore_type: webdav
       webdav_config:
