@@ -2193,6 +2193,9 @@ configuration:
     # CLUSTER_DESCRIPTION is not wrapped in quotes because it has quotes in the dev env file.
     properties.description: ((CLUSTER_DESCRIPTION))
     properties.domain: '"((DOMAIN))"'
+    properties.diego.locket.log_level: '"((GO_LOG_LEVEL))((#LOG_LEVEL))((/LOG_LEVEL))"'
+    properties.diego.locket.sql.db_host: '"mysql-set.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN))"'
+    properties.diego.locket.sql.db_password: '"((MYSQL_DIEGO_LOCKET_PASSWORD))"'
     properties.fissile.monit.password: '"((MONIT_PASSWORD))"'
     # How to reach the capi.cc_uploader
     properties.internal_hostname: cc-uploader-cc-uploader.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN))
