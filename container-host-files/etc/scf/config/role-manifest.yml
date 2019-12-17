@@ -47,10 +47,6 @@ releases:
   version: '26'
   url: https://bosh.io/d/github.com/cloudfoundry/nats-release?v=26
   sha1: 2f2c27acdfff81f3519968921686522518ab5783
-- name: nfs-volume
-  version: "1.5.2"
-  url: "https://bosh.io/d/github.com/cloudfoundry/nfs-volume-release?v=1.5.2"
-  sha1: "14d019e6fd83139fab5e8ee7f162bf6920235888"
 - name: routing
   version: 0.184.0
   url: https://bosh.io/d/github.com/cloudfoundry-incubator/cf-routing-release?v=0.184.0
@@ -1283,54 +1279,6 @@ instance_groups:
       bosh_containerization:
         run:
           privileged: true
-- name: nfs-broker
-  environment_scripts:
-  - scripts/go_log_level.sh
-  scripts:
-  - scripts/forward_logfiles.sh
-  - scripts/patches/fix_monit_rsyslog.sh
-  - scripts/patches/nfsbroker_cert_prop.sh
-  - scripts/patches/nfsbroker_ctl.sh
-  jobs:
-  - name: global-properties # needs to be first so images use it for processing monit templates.
-    release: scf-helper
-  - name: authorize-internal-ca # needs to be second as it is a dependency of other jobs.
-    release: scf
-  - name: nfsbroker
-    release: nfs-volume
-    properties:
-      bosh_containerization:
-        run:
-          scaling:
-            min: 1
-            max: 3
-            ha: 2
-          privileged: true
-          memory: 128
-          virtual-cpus: 2
-          affinity:
-            podAntiAffinity:
-              preferredDuringSchedulingIgnoredDuringExecution:
-              - weight: 100
-                podAffinityTerm:
-                  labelSelector:
-                    matchExpressions:
-                    - key: "app.kubernetes.io/component"
-                      operator: In
-                      values:
-                      - nfs-broker
-                  topologyKey: "beta.kubernetes.io/os"
-        ports:
-        - name: nfsbroker
-          protocol: TCP
-          internal: 8999
-  tags:
-  - sequential-startup
-  configuration:
-    templates:
-      properties.nfsbroker.credhub.ca_cert: '~'
-      properties.nfsbroker.credhub.uaa_ca_cert: '~'
-      properties.nfsbroker.db_ca_cert: '~'
 - name: acceptance-tests-brain
   type: bosh-task
   tags:
@@ -2224,12 +2172,6 @@ configuration:
     properties.name: ((CLUSTER_NAME))
     properties.nats.machines: ((KUBE_NATS_CLUSTER_IPS))((#KUBE_SIZING_NATS_COUNT))((/KUBE_SIZING_NATS_COUNT))
     properties.nats.password: '"((NATS_PASSWORD))"'
-    properties.nfsbroker.allowed_options: '"((PERSI_NFS_ALLOWED_OPTIONS))"'
-    properties.nfsbroker.db_hostname: 'mysql-set.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN))'
-    properties.nfsbroker.db_password: '"((MYSQL_PERSI_NFS_PASSWORD))"'
-    properties.nfsbroker.default_options: '"((PERSI_NFS_DEFAULT_OPTIONS))"'
-    properties.nfsbroker.password: '"((PERSI_NFS_BROKER_PASSWORD))"'
-    properties.nfsbroker.url: 'http://nfs-broker-nfsbroker.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):8999'
 
     properties.router.balancing_algorithm: '"((ROUTER_BALANCING_ALGORITHM))"'
     properties.router.client_cert_validation: '"((ROUTER_CLIENT_CERT_VALIDATION))"'

@@ -301,23 +301,6 @@ properties:
   nats:
     port: 4222
     user: nats
-  nfsbroker:
-    db_driver: 'mysql'
-    db_username: 'nfsvolume'
-    db_port: 3306
-    db_name: 'nfsvolume'
-    services:
-    - id: '20e22be2-a4fb-4b17-a5ef-0c9dba8bdc74'
-      name: 'persi-nfs'
-      description: "Existing NFSv3 volumes (see: https://code.cloudfoundry.org/nfs-volume-release/)"
-      bindable: true
-      plan_updatable: false
-      tags: ["nfs"]
-      requires: ["volume_mount"]
-      plans:
-      - id: Existing
-        name: "Existing"
-        description: "A preexisting filesystem"
   router:
     ca_certs: ''
     enable_ssl: true
