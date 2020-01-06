@@ -49,12 +49,5 @@ properties:
   cf_mysql.mysql.port:
     description: 'Port used by the service broker and bound applications to reach the service'
     default: 3306
-  nfsbroker.url:
-    description: 'Internal URL of the Persi NFS broker'
-  nfsbroker.username:
-    description: "basic auth username to verify on incoming Service Broker requests"
-    default: "admin"
-  nfsbroker.password:
-    description: "basic auth password to verify on incoming Service Broker requests"
   scf.secrets_generation_name:
     description: "Name of the Kubernetes secret containing all SCF certificates, passwords and keys"
