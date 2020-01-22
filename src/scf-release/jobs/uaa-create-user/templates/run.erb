@@ -66,7 +66,7 @@ uaac_ssl = properties.ssl.skip_cert_verify ? '--skip-ssl-validation' : ''
 # Running in vagrant, and managing our own UAA
 # We need to create the zone and populate it
 
-UAA_ZONE_ID="${KUBERNETES_NAMESPACE:-scf}"
+UAA_ZONE_ID="uaa"
 
 status "Waiting for root UAA to be available..."
 retry 240 30s curl ${SILENT} --connect-timeout 5 --fail <%= curl_ssl %> --header 'Accept: application/json' '<%= p("scf.uaa.root-zone.url") %>/info'
