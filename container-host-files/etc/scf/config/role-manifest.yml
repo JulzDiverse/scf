@@ -4,9 +4,9 @@ releases:
   url: "https://bosh.io/d/github.com/cloudfoundry-incubator/bpm-release?v=1.0.0"
   sha1: "42b95d4a0d6d15dd0b0ead62418ffb56208e2307"
 - name: "capi"
-  version: "1.89.0"
-  url: "https://bosh.io/d/github.com/cloudfoundry/capi-release?v=1.89.0"
-  sha1: "472966da017bda3118eb9cf71f9bcca1c23c344a"
+  version: "1.90.0"
+  url: "https://bosh.io/d/github.com/cloudfoundry/capi-release?v=1.90.0"
+  sha1: "ccbb4ab09e9823a3a78b9768260a54eb9bcc1273"
 - name: cf-cli
   version: 1.11.0
   url: https://bosh.io/d/github.com/bosh-packages/cf-cli-release?v=1.11.0
@@ -83,10 +83,10 @@ releases:
   url: "https://s3.amazonaws.com/suse-final-releases/python-buildpack-release-1.6.27.1.tgz"
   version: "1.6.27.1"
   sha1: "9cf483e3decc177855308bd2e753ead4ccc69214"
-- name: ruby-buildpack
-  url: "https://s3.amazonaws.com/suse-final-releases/ruby-buildpack-release-1.7.31.1.tgz"
-  version: "1.7.31.1"
-  sha1: "ede4ae9fb3fb5a400af9d509d6841d9a3991028d"
+- name: "ruby-buildpack"
+  version: "1.8.8"
+  url: "https://bosh.io/d/github.com/cloudfoundry/ruby-buildpack-release?v=1.8.8"
+  sha1: "6f3b311d47580de7292c84145b60c91b81258d72"
 - name: staticfile-buildpack
   url: "https://s3.amazonaws.com/suse-final-releases/staticfile-buildpack-release-1.4.39.1.tgz"
   version: "1.4.39.1"
