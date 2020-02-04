@@ -1159,7 +1159,7 @@ instance_groups:
       properties.uaa.ca_cert: '"((UAA_CA_CERT))((^UAA_CA_CERT))((INTERNAL_CA_CERT))((/UAA_CA_CERT))"'
       properties.uaa.client_id: 'doppler'
       properties.uaa.client_secret: '"((UAA_CLIENTS_DOPPLER_SECRET))"'
-      properties.uaa.internal_addr: '"https://((UAA_HOST)):((UAA_PORT))"'
+      properties.uaa.internal_addr: '"https://((KUBERNETES_NAMESPACE)).((UAA_HOST)):((UAA_PORT))"'
 - name: log-api
   environment_scripts:
   - scripts/configure-HA-hosts.sh
@@ -1413,8 +1413,8 @@ instance_groups:
   configuration:
     templates:
       properties.credhub.authentication.uaa.ca_certs: '["((UAA_CA_CERT))"]'
-      properties.credhub.authentication.uaa.internal_url: https://((UAA_HOST)):((UAA_PORT))
-      properties.credhub.authentication.uaa.url: https://((UAA_HOST)):((UAA_PORT))
+      properties.credhub.authentication.uaa.internal_url: https://((KUBERNETES_NAMESPACE)).((UAA_HOST)):((UAA_PORT))
+      properties.credhub.authentication.uaa.url: https://((KUBERNETES_NAMESPACE)).((UAA_HOST)):((UAA_PORT))
       properties.credhub.authorization.acls.enabled: false
       properties.credhub.data_storage.database: "credhub_user"
       properties.credhub.data_storage.host: mysql-set.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN))
@@ -2124,7 +2124,7 @@ configuration:
     properties.cc.security_event_logging.enabled: '"((ENABLE_SECURITY_EVENT_LOGGING))"'
     properties.cc.staging_timeout_in_seconds: ((STAGING_TIMEOUT))
     properties.cc.staging_upload_password: '"((STAGING_UPLOAD_PASSWORD))"'
-    properties.cc.uaa.internal_url: ((UAA_HOST))
+    properties.cc.uaa.internal_url: ((KUBERNETES_NAMESPACE)).((UAA_HOST))
     properties.ccdb.address: mysql-set.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN))
     properties.ccdb.roles: '[{"name": "ccadmin", "password": "((MYSQL_CCDB_ROLE_PASSWORD))", "tag": "admin"}]'
     properties.cf-usb.broker.external_url: '"https://cf-usb.((KUBERNETES_NAMESPACE)).svc.((KUBERNETES_CLUSTER_DOMAIN)):24054"'
@@ -2167,7 +2167,7 @@ configuration:
     properties.loggregator_agent.tls.ca_cert: '"((INTERNAL_CA_CERT))"'
     properties.loggregator_agent.tls.cert: '"((LOG_CACHE_TO_LOGGREGATOR_AGENT_CERT))"'
     properties.loggregator_agent.tls.key: '"((LOG_CACHE_TO_LOGGREGATOR_AGENT_CERT_KEY))"'
-    properties.login.url: https://((UAA_HOST)):((UAA_PORT))
+    properties.login.url: https://((KUBERNETES_NAMESPACE)).((UAA_HOST)):((UAA_PORT))
     # CLUSTER_NAME is not wrapped in quotes because it has quotes in the dev env file.
     properties.name: ((CLUSTER_NAME))
     properties.nats.machines: ((KUBE_NATS_CLUSTER_IPS))((#KUBE_SIZING_NATS_COUNT))((/KUBE_SIZING_NATS_COUNT))
@@ -2211,7 +2211,7 @@ configuration:
 
     properties.scf.internal-ca-cert: '"((INTERNAL_CA_CERT))"'
     properties.scf.secrets_generation_name: "((KUBE_SECRETS_GENERATION_NAME))"
-    properties.scf.uaa.internal-url: https://((UAA_HOST)):((UAA_PORT))
+    properties.scf.uaa.internal-url: https://((KUBERNETES_NAMESPACE)).((UAA_HOST)):((UAA_PORT))
     properties.scf.uaa.root-zone.url: https://((UAA_HOST)):((UAA_PORT))
     properties.scf_set_proxy.running_http_proxy: '"((HTTP_PROXY))"'
     properties.scf_set_proxy.running_https_proxy: '"((HTTPS_PROXY))"'
@@ -2238,27 +2238,27 @@ configuration:
     properties.uaa.clients.cc_routing.secret: '"((UAA_CLIENTS_CC_ROUTING_SECRET))"'
     properties.uaa.clients.cc_service_key_client.secret: '"((UAA_CLIENTS_CC_SERVICE_KEY_CLIENT_SECRET))"'
     properties.uaa.clients.cf-usb.secret: '"((UAA_CLIENTS_CF_USB_SECRET))"'
-    properties.uaa.clients.cf.redirect-uri: https://((UAA_HOST)):((UAA_PORT))/login
+    properties.uaa.clients.cf.redirect-uri: https://((KUBERNETES_NAMESPACE)).((UAA_HOST)):((UAA_PORT))/login
     properties.uaa.clients.cloud_controller.secret: ((UAA_CC_CLIENT_SECRET))
     properties.uaa.clients.cloud_controller_username_lookup.secret: '"((UAA_CLIENTS_CLOUD_CONTROLLER_USERNAME_LOOKUP_SECRET))"'
     properties.uaa.clients.credhub_user_cli.secret: '"((UAA_CLIENTS_CREDHUB_USER_CLI_SECRET))"'
-    properties.uaa.clients.doppler.redirect-uri: https://((UAA_HOST)):((UAA_PORT))
+    properties.uaa.clients.doppler.redirect-uri: https://((KUBERNETES_NAMESPACE)).((UAA_HOST)):((UAA_PORT))
     properties.uaa.clients.doppler.secret: '"((UAA_CLIENTS_DOPPLER_SECRET))"'
     properties.uaa.clients.gorouter.secret: '"((UAA_CLIENTS_GOROUTER_SECRET))"'
-    properties.uaa.clients.login.redirect-uri: https://((UAA_HOST)):((UAA_PORT))
+    properties.uaa.clients.login.redirect-uri: https://((KUBERNETES_NAMESPACE)).((UAA_HOST)):((UAA_PORT))
     properties.uaa.clients.login.secret: '"((UAA_CLIENTS_LOGIN_SECRET))"'
     properties.uaa.clients.scf_auto_config.secret: '"((UAA_CLIENTS_SCF_AUTO_CONFIG_SECRET))"'
-    properties.uaa.clients.ssh-proxy.redirect-uri: https://((UAA_HOST)):((UAA_PORT))/login
+    properties.uaa.clients.ssh-proxy.redirect-uri: https://((KUBERNETES_NAMESPACE)).((UAA_HOST)):((UAA_PORT))/login
     properties.uaa.clients.ssh-proxy.secret: '"((UAA_CLIENTS_DIEGO_SSH_PROXY_SECRET))"'
     properties.uaa.clients.tcp_emitter.secret: '"((UAA_CLIENTS_TCP_EMITTER_SECRET))"'
     properties.uaa.clients.tcp_router.secret: '"((UAA_CLIENTS_TCP_ROUTER_SECRET))"'
-    properties.uaa.internal_url: https://((UAA_HOST)):((UAA_PORT)) # For loggregator
+    properties.uaa.internal_url: https://((KUBERNETES_NAMESPACE)).((UAA_HOST)):((UAA_PORT)) # For loggregator
     properties.uaa.port: ((UAA_PORT))
     properties.uaa.scim.users: '[{name: admin, password: ((CLUSTER_ADMIN_PASSWORD)), groups: [((CLUSTER_ADMIN_AUTHORITIES))]}]'
     properties.uaa.ssl.port: ((UAA_PORT))
     properties.uaa.tls_port: ((UAA_PORT))
-    properties.uaa.token_endpoint: ((UAA_HOST))
-    properties.uaa.url: https://((UAA_HOST)):((UAA_PORT))
+    properties.uaa.token_endpoint: ((KUBERNETES_NAMESPACE)).((UAA_HOST))
+    properties.uaa.url: https://((KUBERNETES_NAMESPACE)).((UAA_HOST)):((UAA_PORT))
     properties.version: '"((CLUSTER_VERSION))"'
     # Really a loggregator_agent job property
     properties.zone: '"((KUBE_AZ))"'
