@@ -168,7 +168,7 @@ properties:
     - name: java_buildpack
       package: java-buildpack
     - name: ruby_buildpack
-      package: ruby-buildpack
+      package: ruby-buildpack-cflinuxfs3
     - name: nodejs_buildpack
       package: nodejs-buildpack
     - name: go_buildpack
